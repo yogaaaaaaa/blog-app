@@ -2,15 +2,14 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
+const authRoute = require("./routes/auth");
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
 
-app.listen("5000", () => {
-  console.log("backend is running at 5000");
+app.use(express.json());
+app.listen(port, () => {
+  console.log(`backend is running at ${port}`);
 });
 mongoose.connect(process.env.MONGO_URL).then(console.log("db connected"));
-app.use("/", (req, res) => {
-  console.log("hey this is main url");
-});
 
-app.use("/auth", (req, res)=>{
-  
-})
+app.use("/api/auth", authRoute);
