@@ -10,3 +10,7 @@ mongoose.connect(process.env.MONGO_URL).then(console.log("db connected"));
 app.use("/", (req, res) => {
   console.log("hey this is main url");
 });
+
+app.use("/auth", (req, res)=>{
+  
+})
