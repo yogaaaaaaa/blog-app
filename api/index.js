@@ -10,6 +10,9 @@ app.use(express.json());
 app.listen(port, () => {
   console.log(`backend is running at ${port}`);
 });
-mongoose.connect(process.env.MONGO_URL).then(console.log("db connected"));
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(console.log("db connected"))
+  .catch((err) => console.log(err));
 
 app.use("/api/auth", authRoute);
