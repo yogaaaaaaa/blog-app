@@ -31,20 +31,35 @@ router.put("/:id", async (req, res) => {
 
 //delete user
 router.delete("/:id", async (req, res) => {
-  if (req.body.userId == req.params.id) {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    res.status(404).json("user not found");
+  } else if (req.body.userId == req.params.id) {
     try {
-      const user = await User.findById(req.params.id);
-      try {
-        await Post.deleteMany({ username: user.username });
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("user succesfully deleted...!");
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    } catch (err) {
-      res.status(404).json("user not found");
+      await Post.deleteMany({ username: user.username });
+      await User.findByIdAndDelete(req.params.id);
+      res.status(200).json("user succesfully deleted...!");
+    } catch {
+      res.status(500).json(err);
     }
-  } else {
+  }
+
+  // if (req.body.userId == req.params.id) {
+  //   try {
+  //     const user = await User.findById(req.params.id);
+  //     try {
+  //       await Post.deleteMany({ username: user.username });
+  //       await User.findByIdAndDelete(req.params.id);
+  //       res.status(200).json("user succesfully deleted...!");
+  //     } catch (err) {
+  //       res.status(500).json(err);
+  //     }
+  //   } catch (err) {
+  //     res.status(404).json("user not found");
+  //   }
+  // }
+  else {
     res.status(401).json("you only able to delete your own account!");
   }
 });
