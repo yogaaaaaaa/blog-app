@@ -81,16 +81,36 @@ router.get("/:id", async (req, res) => {
 
 //find all post
 router.get("/", async (req, res) => {
-  const posts = await Post.find();
+  // const posts = await Post.find();
 
-  if (!posts) {
-    res.status(404).json("there is no post");
-  } else {
-    try {
-      res.status(200).json(posts);
-    } catch (err) {
-      res.status(500).json(err);
+  // if (!posts) {
+  //   res.status(404).json("there is no post");
+  // } else {
+  //   try {
+  //     res.status(200).json(posts);
+  //   } catch (err) {
+  //     res.status(500).json(err);
+  //   }
+  // }
+
+  const username = req.query.user;
+  const catName = req.query.categories;
+  try {
+    let posts;
+    if (username) {
+      posts = await Post.find({ username });
+    } else if (catName) {
+      posts = await Post.find({
+        categories: {
+          $in: [catName],
+        },
+      });
+    } else {
+      posts = await Post.find();
     }
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
