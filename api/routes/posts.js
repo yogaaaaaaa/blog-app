@@ -62,19 +62,33 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//get user
+//get post
 router.get("/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const post = await Post.findById(req.params.id);
   // console.log(user)
 
-  if (!user) {
-    res.status(404).json("there is no user with given id");
+  if (!post) {
+    res.status(404).json("there is no post with that id");
   } else {
     try {
-      const { password, ...others } = user._doc;
-      res.status(200).json(others);
+      res.status(200).json(post);
     } catch (err) {
       console.log(err);
+      res.status(500).json(err);
+    }
+  }
+});
+
+//find all post
+router.get("/", async (req, res) => {
+  const posts = await Post.find();
+
+  if (!posts) {
+    res.status(404).json("there is no post");
+  } else {
+    try {
+      res.status(200).json(posts);
+    } catch (err) {
       res.status(500).json(err);
     }
   }
