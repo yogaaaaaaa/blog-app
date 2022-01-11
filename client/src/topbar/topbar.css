@@ -50,3 +50,10 @@
     font-weight: 300;
     cursor: pointer;
 }
+
+.topSearchIcon{
+    font-size: 18;
+    color :#665;
+    cursor: pointer;
+    margin-left: 10px;
+}
