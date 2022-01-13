@@ -1,12 +1,12 @@
 // import logo from './logo.svg';
-import Topbar from './topbar/Topbar.jsx';
-import Home from './pages/home/Home.jsx';
+import Topbar from './components/topbar/Topbar.jsx';
+import Single from './pages/single/Single.jsx';
 
 function App() {
   return (
     <>
       <Topbar/>
-      <Home/>
+      <Single/>
     </>
   );
 }
