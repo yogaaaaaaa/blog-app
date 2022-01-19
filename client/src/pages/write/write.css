@@ -36,18 +36,24 @@
 .writeInput {
   font-size: 30px;
   border: none;
-  padding: 20;
+  padding: 20px;
   width: 70vw;
 }
 
+.writeInput::placeholder {
+  color: rgb(189, 185, 185);
+  font-weight: 400;
+}
+
 .writeInput:focus {
-  outline: none;
- 
+  outline-style: none;
 }
 
 .writeText {
-  font-style: 20px;
+  width: 70vw;
   height: 100vh;
+  font-style: inherit;
+  font-size: 20px;
 }
 
 .writeSubmit {
@@ -57,7 +63,9 @@
   color: white;
   background-color: teal;
   padding: 10px;
+  border: none;
   border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
